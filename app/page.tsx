@@ -24,6 +24,7 @@ export default function Home() {
       return;
     }
 
+    setInputError("");
     setLoading(true);
 
     try {
