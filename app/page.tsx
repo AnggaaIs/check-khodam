@@ -32,7 +32,6 @@ export default function Home() {
       const data = await req.json();
 
       if (data.statusCode === 500) {
-        setLoading(false);
         setInputError("Khodam tidak ada!");
         return;
       }

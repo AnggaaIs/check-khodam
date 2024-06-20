@@ -29,7 +29,7 @@ export async function GET(req: Request) {
 
     response = JSON.parse(response) as KhodamResult;
 
-    return Response.json(response);
+    return Response.json({ statusCode: 200, ...response });
   } catch (e) {
     return Response.json({
       statusCode: 500,
