@@ -50,7 +50,9 @@ export default function Home() {
 
   useEffect(() => {
     async function getQuotes() {
-      let fetchdata = await fetch(`${baseAPI}/api/quote`);
+      let fetchdata = await fetch(`${baseAPI}/api/quote`, {
+        cache: "no-store",
+      });
       let data = await fetchdata.json();
       if (data.statusCode === 500) return getQuotes();
       setQuotes(data.quote);
