@@ -28,7 +28,9 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const req = await fetch(`${baseAPI}/api/khodam?name=${nama}`);
+      const req = await fetch(`${baseAPI}/api/khodam?name=${nama}`, {
+        cache: 'no-store'
+      });
       const data = await req.json();
 
       if (data.statusCode === 500) {
@@ -62,7 +64,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-[100vh] bg-blue-100">
+    <div className="px-4 flex items-center justify-center min-h-[100vh] bg-blue-100">
       <div className="max-w-7xl w-full flex items-center justify-center">
         <div className="space-y-6 py-10">
           <div className="bg-white px-5 py-3 rounded-lg w-96 gap-2 flex justify-around">
