@@ -1,10 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Toast } from "flowbite-react";
 import { HiExclamation } from "react-icons/hi";
 import { Skeleton } from "@/app/components/Skeleton";
 import Button from "./components/Button";
+
+const baseAPI =
+  process.env.NODE_ENV === "production"
+    ? "https://check-khodam-seven.vercel.app"
+    : "http://localhost:3000";
 
 export default function Home() {
   const [isLoading, setLoading] = useState(false);
@@ -23,11 +27,12 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const req = await fetch(`http://localhost:3000/api/khodam?name=${nama}`);
+      const req = await fetch(`${baseAPI}/api/khodam?name=${nama}`);
       const data = await req.json();
 
       if (data.statusCode === 500) {
         setLoading(false);
+        setInputError("Khodam tidak ada!");
         return;
       }
 
@@ -45,20 +50,19 @@ export default function Home() {
 
   useEffect(() => {
     async function getQuotes() {
-      let fetchdata = await fetch("http://localhost:3000/api/quote");
+      let fetchdata = await fetch(`${baseAPI}/api/quote`);
       let data = await fetchdata.json();
+      if (data.statusCode === 500) return getQuotes();
       setQuotes(data.quote);
       setQuotesLoading(false);
     }
     getQuotes();
-
   }, []);
 
   return (
     <div className="flex items-center justify-center min-h-[100vh] bg-blue-100">
       <div className="max-w-7xl w-full flex items-center justify-center">
         <div className="space-y-6 py-10">
-
           <div className="bg-white px-5 py-3 rounded-lg w-96 gap-2 flex justify-around">
             <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-200/70 text-orange-400">
               <HiExclamation className="h-5 w-5" />
@@ -78,8 +82,9 @@ export default function Home() {
                   <input
                     type="text"
                     placeholder="Masukkan nama kamu"
-                    className={`input input-bordered w-full max-w-xs rounded-md ${inputError ? "input-error" : ""
-                      }`}
+                    className={`input input-bordered w-full max-w-xs rounded-md ${
+                      inputError ? "input-error" : ""
+                    }`}
                     onChange={(e) => {
                       setNama(e.target.value);
                       setInputError("");
@@ -90,9 +95,7 @@ export default function Home() {
                     <p className="text-red-500 text-sm">{inputError}</p>
                   )}
                   <div className="card-actions justify-center mt-5">
-                    <Button
-                      onClick={checkKodam}
-                    >
+                    <Button onClick={checkKodam}>
                       <span
                         className={
                           isLoading
@@ -113,20 +116,31 @@ export default function Home() {
                   <p className="text-gray-600 text-left">
                     {khodamData.deskripsi_khodam}
                   </p>
-                  <Button className='mt-5'
-                  onClick={() => {
-                    setInputError("");
-                    setNama("");
-                    setKhodamData(null);
-                  }}>
+                  <Button
+                    className="mt-5"
+                    onClick={() => {
+                      setInputError("");
+                      setNama("");
+                      setKhodamData(null);
+                    }}
+                  >
                     Back
                   </Button>
                 </div>
               )}
             </div>
           </div>
-          <p className="text-gray-500 text-center">Made by <a href="https://github.com/LazyyPeople" target="_blank" className="text-blue-500">LazyPeople </a>
-            for everyone</p>
+          <p className="text-gray-500 text-center">
+            Made by{" "}
+            <a
+              href="https://github.com/LazyyPeople"
+              target="_blank"
+              className="text-blue-500"
+            >
+              LazyPeople{" "}
+            </a>
+            for everyone
+          </p>
         </div>
       </div>
     </div>

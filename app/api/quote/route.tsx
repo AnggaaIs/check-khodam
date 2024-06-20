@@ -17,7 +17,11 @@ export async function GET() {
 
     response = JSON.parse(response);
 
-    return Response.json({ date: new Date(), quote: response.quotes });
+    return Response.json({
+      statusCode: 200,
+      date: new Date(),
+      quote: response.quotes,
+    });
   } catch (e) {
     return Response.json({
       statusCode: 500,
