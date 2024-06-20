@@ -125,7 +125,8 @@ export default function Home() {
               )}
             </div>
           </div>
-          <p className="text-gray-500 text-center">Made by AnggaaIs for everyone</p>
+          <p className="text-gray-500 text-center">Made by <a href="https://github.com/LazyyPeople" target="_blank" className="text-blue-500">LazyPeople </a>
+            for everyone</p>
         </div>
       </div>
     </div>
