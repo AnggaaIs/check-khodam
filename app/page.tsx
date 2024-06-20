@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { Toast } from "flowbite-react";
 import { HiExclamation } from "react-icons/hi";
@@ -42,13 +43,15 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/quote").then((d) =>
-      d.json().then((q) => {
-        setQuotes(q.quote);
-        setQuotesLoading(false);
-      })
-    );
-  }, [quotes]);
+    async function getQuotes () {
+      let fetchdata = await fetch("http://localhost:3000/api/quote");
+      let data = await fetchdata.json();
+      setQuotes(data.quote);
+      setQuotesLoading(false);
+    }
+    getQuotes();
+
+  }, []);
 
   return (
     <div className="flex flex-col gap-4 items-center justify-center h-[100vh] bg-blue-100">
@@ -73,9 +76,8 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="Masukkan nama kamu"
-                className={`input input-bordered w-full max-w-xs rounded-md ${
-                  inputError ? "input-error" : ""
-                }`}
+                className={`input input-bordered w-full max-w-xs rounded-md ${inputError ? "input-error" : ""
+                  }`}
                 onChange={(e) => {
                   setNama(e.target.value);
                   setInputError("");
