@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Nunito, Poppins } from "next/font/google";
+import { Nunito } from "next/font/google";
+import PlausibleProvider from "next-plausible";
 import "./globals.css";
 
 const inter = Nunito({ subsets: ["latin"] });
@@ -16,6 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="cupcake">
+      <head>
+        <PlausibleProvider domain="check-khodam-seven.vercel.app" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
