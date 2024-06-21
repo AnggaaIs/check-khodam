@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="cupcake">
+    <html lang="id" data-theme="cupcake">
       <head>
         <PlausibleProvider domain="check-khodam-seven.vercel.app" />
       </head>
