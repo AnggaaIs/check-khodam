@@ -14,7 +14,7 @@ export async function GET() {
           content: `Hei, buat aku sebuah quotes dalam format JSON. Topiknya bebas, bisa tentang cinta, motivasi, kehidupan, atau apapun yang menarik. Gaya bahasanya santai aja, kayak ngobrol sama temen, hindari bahasa baku dan kalimat yang ribet, hindari juga bahasa inggris utamakan bahasa indonesia.\nFormat JSONnya kayak gini: {"quotes": "Masukan quotes di sini"}\nKalau butuh inspirasi, bisa cek buku, film, lagu, atau media sosial. Pastikan quotesnya original ya, jangan jiplak punya orang lain!`,
         },
       ],
-      { provider: g4f.providers.GPT, model: "gpt-3.5-turbo" }
+      { provider: g4f.providers.GPT, model: "gpt-4" }
     );
 
     response = JSON.parse(response);
