@@ -24,6 +24,11 @@ export default function Home() {
       return;
     }
 
+    if (nama.length > 45) {
+      setInputError("Hmmm, namanya kepanjangan deh...");
+      return;
+    }
+
     setInputError("");
     setLoading(true);
 
