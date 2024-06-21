@@ -50,7 +50,7 @@ export default function Home() {
 
   useEffect(() => {
     async function getQuotes() {
-      let fetchdata = await fetch(`${baseAPI}/api/quote?time=${Date.now()}`, {
+      let fetchdata = await fetch(`${baseAPI}/api/quote`, {
         cache: "no-store",
       });
       let data = await fetchdata.json();

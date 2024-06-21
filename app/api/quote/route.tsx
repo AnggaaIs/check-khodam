@@ -3,6 +3,8 @@ import moment from "moment-timezone";
 const g4f = new G4F();
 moment.tz.setDefault("Asia/Jakarta");
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     let response = await g4f.chatCompletion(
